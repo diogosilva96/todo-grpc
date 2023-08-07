@@ -2,19 +2,43 @@
 
 option csharp_namespace = "Todo.Grpc";
 
+import "google/api/annotations.proto";
+
 package todo;
 
 service Todo {
   
-  rpc CreateTodo(CreateTodoRequest) returns (CreateTodoResponse){}
+  rpc CreateTodo(CreateTodoRequest) returns (CreateTodoResponse){
+    option (google.api.http) = {
+      post: "/v1/todo",
+      body: "*"
+    };
+  }
   
-  rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {}
+  rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {
+    option (google.api.http) = {
+      get: "/v1/todo/{id}"
+    };
+  }
   
-  rpc ListTodo(ListTodoRequest) returns (ListTodoResponse) {}
+  rpc ListTodo(ListTodoRequest) returns (ListTodoResponse) {
+    option (google.api.http) = {
+      get: "/v1/todo"
+    };
+  }
   
-  rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse) {}
+  rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse) {
+    option (google.api.http) = {
+      put: "/v1/todo",
+      body: "*"
+    };
+  }
     
-  rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse) {}  
+  rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse) {
+    option (google.api.http) = {
+      delete: "/v1/todo/{id}"
+    };
+  }  
 }
 
 message CreateTodoRequest {

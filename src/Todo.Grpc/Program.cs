@@ -4,9 +4,12 @@ using Todo.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=TodoDatabase"));
+builder.Services
+       .AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=TodoDatabase"));
 
-builder.Services.AddGrpc();
+builder.Services
+       .AddGrpc()
+       .AddJsonTranscoding();
 
 var app = builder.Build();
 
