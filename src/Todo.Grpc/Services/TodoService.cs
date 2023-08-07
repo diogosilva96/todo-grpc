@@ -50,7 +50,7 @@ public class TodoService : Todo.TodoBase
         {
             Id = todo.Id,
             Description = todo.Description,
-            Status = todo.Description,
+            Status = todo.TodoStatus,
             Title = todo.Title
         };
     }
