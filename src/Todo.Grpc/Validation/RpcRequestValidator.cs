@@ -3,11 +3,11 @@ using Todo.Grpc.Services;
 
 namespace Todo.Grpc.Validation;
 
-public class GrpcRequestValidator : IGrpcRequestValidator
+public class RpcRequestValidator : IRpcRequestValidator
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public GrpcRequestValidator(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
+    public RpcRequestValidator(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
     public async Task ValidateAndThrowIfInvalidAsync<T>(T request,
         CancellationToken cancellationToken = default)

@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
        .AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=TodoDatabase"))
        .AddValidatorsFromAssemblyContaining<Program>()
-       .AddTransient<IGrpcRequestValidator, GrpcRequestValidator>()
+       .AddTransient<IRpcRequestValidator, RpcRequestValidator>()
        .AddGrpc()
        .AddJsonTranscoding();
 

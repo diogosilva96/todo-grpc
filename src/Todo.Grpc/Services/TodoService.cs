@@ -9,9 +9,9 @@ namespace Todo.Grpc.Services;
 public class TodoService : Todo.TodoBase
 {
     private readonly AppDbContext _dbContext;
-    private readonly IGrpcRequestValidator _requestValidator;
+    private readonly IRpcRequestValidator _requestValidator;
 
-    public TodoService(AppDbContext dbContext, IGrpcRequestValidator requestValidator)
+    public TodoService(AppDbContext dbContext, IRpcRequestValidator requestValidator)
     {
         _dbContext = dbContext;
         _requestValidator = requestValidator;

@@ -1,6 +1,6 @@
 ﻿namespace Todo.Grpc.Validation;
 
-public interface IGrpcRequestValidator
+public interface IRpcRequestValidator
 {
     public Task ValidateAndThrowIfInvalidAsync<T>(T request, CancellationToken cancellationToken = default);
 }
