@@ -2,21 +2,24 @@
 using Microsoft.EntityFrameworkCore;
 using Todo.Grpc.Data;
 using Todo.Grpc.Models;
+using Todo.Grpc.Validation;
 
 namespace Todo.Grpc.Services;
 
 public class TodoService : Todo.TodoBase
 {
     private readonly AppDbContext _dbContext;
+    private readonly IGrpcRequestValidator _requestValidator;
 
-    public TodoService(AppDbContext dbContext) => _dbContext = dbContext;
+    public TodoService(AppDbContext dbContext, IGrpcRequestValidator requestValidator)
+    {
+        _dbContext = dbContext;
+        _requestValidator = requestValidator;
+    }
 
     public override async Task<CreateTodoResponse> CreateTodo(CreateTodoRequest request, ServerCallContext context)
     {
-        if (string.IsNullOrWhiteSpace(request.Title) || string.IsNullOrWhiteSpace(request.Description))
-        {
-            throw new RpcException(new(StatusCode.InvalidArgument, "The object is not valid."));
-        }
+        await _requestValidator.ValidateAndThrowIfInvalidAsync(request, context.CancellationToken);
 
         var todoItem = new TodoItem
         {
@@ -35,15 +38,12 @@ public class TodoService : Todo.TodoBase
 
     public override async Task<GetTodoResponse> GetTodo(GetTodoRequest request, ServerCallContext context)
     {
-        if (request.Id <= 0)
-        {
-            throw new RpcException(new(StatusCode.InvalidArgument, "The id is invalid."));
-        }
+        await _requestValidator.ValidateAndThrowIfInvalidAsync(request, context.CancellationToken);
 
         var todo = await _dbContext.TodoItems.FirstOrDefaultAsync(t => t.Id == request.Id, context.CancellationToken);
         if (todo == default)
         {
-            throw new RpcException(new(StatusCode.NotFound, "The object could not be found."));
+            throw RpcExceptions.NotFound();
         }
 
         return new()
@@ -76,16 +76,12 @@ public class TodoService : Todo.TodoBase
 
     public override async Task<UpdateTodoResponse> UpdateTodo(UpdateTodoRequest request, ServerCallContext context)
     {
-        if (request.Id <= 0 || string.IsNullOrWhiteSpace(request.Title) ||
-            string.IsNullOrWhiteSpace(request.Description))
-        {
-            throw new RpcException(new(StatusCode.InvalidArgument, "The object is not valid."));
-        }
+        await _requestValidator.ValidateAndThrowIfInvalidAsync(request, context.CancellationToken);
 
         var todo = await _dbContext.TodoItems.FirstOrDefaultAsync(t => t.Id == request.Id, context.CancellationToken);
         if (todo == default)
         {
-            throw new RpcException(new(StatusCode.NotFound, "The object could not be found."));
+            throw RpcExceptions.NotFound();
         }
 
         todo.Description = request.Description;
@@ -101,15 +97,12 @@ public class TodoService : Todo.TodoBase
 
     public override async Task<DeleteTodoResponse> DeleteTodo(DeleteTodoRequest request, ServerCallContext context)
     {
-        if (request.Id <= 0)
-        {
-            throw new RpcException(new(StatusCode.InvalidArgument, "The id is invalid."));
-        }
+        await _requestValidator.ValidateAndThrowIfInvalidAsync(request, context.CancellationToken);
 
         var todo = await _dbContext.TodoItems.FirstOrDefaultAsync(t => t.Id == request.Id, context.CancellationToken);
         if (todo == default)
         {
-            throw new RpcException(new(StatusCode.NotFound, "The object could not be found."));
+            throw RpcExceptions.NotFound();
         }
 
         _dbContext.Remove(todo);
