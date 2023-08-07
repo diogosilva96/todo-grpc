@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="11.6.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.49.0"/>
         <PackageReference Include="Grpc.Tools" Version="2.56.2">
             <PrivateAssets>all</PrivateAssets>
@@ -24,6 +25,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.9"/>
     </ItemGroup>
+
 
 
 
