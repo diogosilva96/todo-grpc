@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{393C9F5F-6C4C-49C1-BD9C-C5FA275468F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Grpc", "src\Todo.Grpc\Todo.Grpc.csproj", "{3CB8F76E-2C4B-4841-979C-5AFADB377B99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CB8F76E-2C4B-4841-979C-5AFADB377B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB8F76E-2C4B-4841-979C-5AFADB377B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB8F76E-2C4B-4841-979C-5AFADB377B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB8F76E-2C4B-4841-979C-5AFADB377B99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CB8F76E-2C4B-4841-979C-5AFADB377B99} = {393C9F5F-6C4C-49C1-BD9C-C5FA275468F5}
+	EndGlobalSection
+EndGlobal
