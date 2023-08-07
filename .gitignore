@@ -478,3 +478,6 @@ $RECYCLE.BIN/
 
 # Rider
 .idea/
+
+# Ignore Sqlite DB
+TodoDatabase*
